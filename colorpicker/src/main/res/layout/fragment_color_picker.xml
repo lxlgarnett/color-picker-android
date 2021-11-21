@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="colorHexValue"
+            type="String" />
+
+        <variable
+            name="redValue"
+            type="int" />
+
+        <variable
+            name="greenValue"
+            type="int" />
+
+        <variable
+            name="blueValue"
+            type="int" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.lxlgarnett.view.ColorPickerDialogFragment">
+
+        <View
+            android:id="@+id/color_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="@dimen/cp_dialog_fragment_margin"
+            app:layout_constraintBottom_toTopOf="@+id/red_slider"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/color_hex_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{colorHexValue}"
+            android:textSize="@dimen/cp_dialog_fragment_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/color_view"
+            app:layout_constraintLeft_toLeftOf="@+id/color_view"
+            app:layout_constraintRight_toRightOf="@+id/color_view"
+            app:layout_constraintTop_toTopOf="@+id/color_view" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/red_slider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/cp_dialog_fragment_margin"
+            android:stepSize="1"
+            android:value="@{redValue}"
+            android:valueFrom="0"
+            android:valueTo="255"
+            android:visibility="visible"
+            app:labelBehavior="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/red_value_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/color_view"
+            app:thumbColor="@color/red"
+            app:tickVisible="false"
+            app:trackColorActive="@color/red"
+            app:trackColorInactive="@color/grey" />
+
+        <TextView
+            android:id="@+id/red_value_text_view"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cp_dialog_fragment_margin"
+            android:layout_marginEnd="@dimen/cp_dialog_fragment_margin"
+            android:layout_marginBottom="@dimen/cp_dialog_fragment_margin"
+            android:gravity="center"
+            android:text="@{String.valueOf(redValue)}"
+            android:textSize="@dimen/cp_dialog_fragment_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/red_slider"
+            app:layout_constraintLeft_toRightOf="@+id/red_slider"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/color_view"
+            app:layout_constraintTop_toTopOf="@+id/red_slider" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/green_slider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/cp_dialog_fragment_margin"
+            android:stepSize="1"
+            android:value="@{greenValue}"
+            android:valueFrom="0"
+            android:valueTo="255"
+            android:visibility="visible"
+            app:labelBehavior="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/green_value_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/red_slider"
+            app:thumbColor="@color/green"
+            app:tickVisible="false"
+            app:trackColorActive="@color/green"
+            app:trackColorInactive="@color/grey" />
+
+        <TextView
+            android:id="@+id/green_value_text_view"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cp_dialog_fragment_margin"
+            android:layout_marginEnd="@dimen/cp_dialog_fragment_margin"
+            android:layout_marginBottom="@dimen/cp_dialog_fragment_margin"
+            android:gravity="center"
+            android:text="@{String.valueOf(greenValue)}"
+            android:textSize="@dimen/cp_dialog_fragment_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/green_slider"
+            app:layout_constraintLeft_toRightOf="@+id/green_slider"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/red_value_text_view"
+            app:layout_constraintTop_toTopOf="@+id/green_slider" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/blue_slider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/cp_dialog_fragment_margin"
+            android:stepSize="1"
+            android:value="@{blueValue}"
+            android:valueFrom="0"
+            android:valueTo="255"
+            android:visibility="visible"
+            app:labelBehavior="gone"
+            app:layout_constraintBottom_toTopOf="@+id/ok_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/blue_value_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/green_slider"
+            app:thumbColor="@color/blue"
+            app:tickVisible="false"
+            app:trackColorActive="@color/blue"
+            app:trackColorInactive="@color/grey" />
+
+        <TextView
+            android:id="@+id/blue_value_text_view"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cp_dialog_fragment_margin"
+            android:layout_marginEnd="@dimen/cp_dialog_fragment_margin"
+            android:layout_marginBottom="@dimen/cp_dialog_fragment_margin"
+            android:gravity="center"
+            android:text="@{String.valueOf(blueValue)}"
+            android:textSize="@dimen/cp_dialog_fragment_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/blue_slider"
+            app:layout_constraintLeft_toRightOf="@+id/blue_slider"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/green_value_text_view"
+            app:layout_constraintTop_toTopOf="@+id/blue_slider" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cp_dialog_fragment_margin"
+            android:text="@string/cp_color_picker_dialog_fragment_cancel_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ok_button" />
+
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/cp_dialog_fragment_margin"
+            android:layout_marginBottom="@dimen/cp_dialog_fragment_margin"
+            android:text="@string/cp_color_picker_dialog_fragment_ok_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blue_slider" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

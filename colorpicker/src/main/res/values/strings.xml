@@ -1,0 +1,4 @@
+<resources>
+    <string name="cp_color_picker_dialog_fragment_ok_button">OK</string>
+    <string name="cp_color_picker_dialog_fragment_cancel_button">Cancel</string>
+</resources>
