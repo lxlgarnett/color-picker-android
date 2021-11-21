@@ -6,19 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
 import com.lxlgarnett.colorpicker.databinding.FragmentColorPickerBinding
 
 class ColorPickerDialogFragment private constructor(private var initColor: Int) :
     DialogFragment() {
 
     companion object {
-        private val TAG: String = ColorPickerDialogFragment::class.java.simpleName
+        private const val MAX_RGB_VALUE: Int = 255
+
+        val TAG: String = ColorPickerDialogFragment::class.java.simpleName
 
         fun newInstance(initColor: Int = Color.WHITE): ColorPickerDialogFragment {
-            val instance = ColorPickerDialogFragment(initColor)
-            instance.isCancelable = false
-            return instance
+            return ColorPickerDialogFragment(initColor)
         }
     }
 
@@ -36,51 +35,32 @@ class ColorPickerDialogFragment private constructor(private var initColor: Int) 
     ): View {
         _binding = FragmentColorPickerBinding.inflate(inflater, container, false)
 
-        binding.redValue = Color.red(initColor)
-        binding.greenValue = Color.green(initColor)
-        binding.blueValue = Color.blue(initColor)
-        binding.colorHexValue = String.format("#%06X", 0xFFFFFF and initColor)
+        initView(initColor)
+
         binding.redSlider.addOnChangeListener { _, value, _ ->
             binding.redValue = value.toInt()
-            val color = Color.rgb(
-                binding.redValue,
-                binding.greenValue,
-                binding.blueValue
-            )
-            binding.colorView.setBackgroundColor(color)
-            binding.colorHexValue = String.format("#%06X", 0xFFFFFF and color)
-
-            val textColor =
-                Color.rgb(255 - binding.redValue, 255 - binding.greenValue, 255 - binding.blueValue)
-            binding.colorHexTextView.setTextColor(textColor)
+            updateColorView(binding.redValue, binding.greenValue, binding.blueValue)
         }
 
         binding.blueSlider.addOnChangeListener { _, value, _ ->
             binding.blueValue = value.toInt()
-            val color = Color.rgb(
-                binding.redValue,
-                binding.greenValue,
-                binding.blueValue
-            )
-            binding.colorView.setBackgroundColor(color)
-            binding.colorHexValue = String.format("#%06X", 0xFFFFFF and color)
-            val textColor =
-                Color.rgb(255 - binding.redValue, 255 - binding.greenValue, 255 - binding.blueValue)
-            binding.colorHexTextView.setTextColor(textColor)
+            updateColorView(binding.redValue, binding.greenValue, binding.blueValue)
         }
 
         binding.greenSlider.addOnChangeListener { _, value, _ ->
             binding.greenValue = value.toInt()
-            val color = Color.rgb(
-                binding.redValue,
-                binding.greenValue,
-                binding.blueValue
-            )
-            binding.colorView.setBackgroundColor(color)
-            binding.colorHexValue = String.format("#%06X", 0xFFFFFF and color)
-            val textColor =
-                Color.rgb(255 - binding.redValue, 255 - binding.greenValue, 255 - binding.blueValue)
-            binding.colorHexTextView.setTextColor(textColor)
+            updateColorView(binding.redValue, binding.greenValue, binding.blueValue)
+        }
+
+        binding.okButton.setOnClickListener {
+            val color = Color.rgb(binding.redValue, binding.greenValue, binding.blueValue)
+            listener?.onSelected(color)
+            this.dismiss()
+        }
+
+        binding.cancelButton.setOnClickListener {
+            listener?.onCanceled()
+            this.dismiss()
         }
         return binding.root
     }
@@ -89,18 +69,42 @@ class ColorPickerDialogFragment private constructor(private var initColor: Int) 
         this.listener = listener
     }
 
-    fun show(childFragmentManager: FragmentManager) {
-        show(childFragmentManager, TAG)
+    private fun initView(initColor: Int) {
+        try {
+            binding.redValue = Color.red(initColor)
+            binding.greenValue = Color.green(initColor)
+            binding.blueValue = Color.blue(initColor)
+            binding.colorHexValue = convertColorToHexString(initColor)
+        } catch (exception: RuntimeException) {
+            listener?.onFailed(exception)
+        }
+    }
+
+    private fun updateColorView(red: Int, green: Int, blue: Int) {
+        val color = Color.rgb(red, green, blue)
+        binding.colorView.setBackgroundColor(color)
+        binding.colorHexValue = convertColorToHexString(color)
+
+        val textColor = getReverseColor(red, green, blue)
+        binding.colorHexTextView.setTextColor(textColor)
+    }
+
+    private fun convertColorToHexString(color: Int): String {
+        return String.format("#%06X", 0xFFFFFF and color)
+    }
+
+    private fun getReverseColor(red: Int, green: Int, blue: Int): Int {
+        return Color.rgb(MAX_RGB_VALUE - red, MAX_RGB_VALUE - green, MAX_RGB_VALUE - blue)
+    }
+
+    interface ColorPickListener {
+        fun onSelected(color: Int)
+        fun onCanceled()
+        fun onFailed(exception: RuntimeException)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-    interface ColorPickListener {
-        fun onSelected()
-        fun onCanceled()
-    }
-
 }
