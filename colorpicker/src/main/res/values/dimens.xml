@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Xiaolei Li on 11/22/21, 12:13 AM
+  ~ Copyright (c) 2021 Xiaolei Li.
+  ~ All rights reserved.
+  ~ Last modified 11/21/21, 11:40 PM
+  -->
+
+<resources>
+    <dimen name="cp_dialog_fragment_margin">16dp</dimen>
+    <dimen name="cp_dialog_fragment_text_size">20sp</dimen>
+</resources>

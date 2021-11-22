@@ -1,0 +1,11 @@
+<!--
+  ~ Created by Xiaolei Li on 11/22/21, 12:13 AM
+  ~ Copyright (c) 2021 Xiaolei Li.
+  ~ All rights reserved.
+  ~ Last modified 11/21/21, 11:40 PM
+  -->
+
+<resources>
+    <string name="cp_color_picker_dialog_fragment_ok_button">OK</string>
+    <string name="cp_color_picker_dialog_fragment_cancel_button">Cancel</string>
+</resources>

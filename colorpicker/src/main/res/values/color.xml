@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Xiaolei Li on 11/22/21, 12:12 AM
+  ~ Copyright (c) 2021 Xiaolei Li.
+  ~ All rights reserved.
+  ~ Last modified 11/21/21, 11:40 PM
+  -->
+
+<resources>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FFFF0000</color>
+
+    <color name="black_russian">#FF1D1E21</color>
+    <color name="perano">#FFB5B9DF</color>
+
+    <color name="robins_egg_blue">#FF03DAC5</color>
+
+    <color name="wisteria">#FFBB86FC</color>
+    <color name="electric_indigo">#FF6200EE</color>
+    <color name="ultramarine">#FF3700B3</color>
+    <color name="grey">#FF777777</color>
+    <color name="green">#FF00FF00</color>
+    <color name="blue">#FF0000FF</color>
+</resources>
