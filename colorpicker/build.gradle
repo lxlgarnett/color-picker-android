@@ -48,6 +48,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
+def githubPropertiesFile = file('github.properties')
+Properties githubProperties = new Properties()
+
+if (githubPropertiesFile.canRead()) {
+    githubProperties.load(new FileInputStream(githubPropertiesFile))
+}
+def token= githubProperties['TOKEN']
+
 afterEvaluate {
     publishing {
         publications {
@@ -58,7 +66,7 @@ afterEvaluate {
 
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.lxlgarnett.colorpicker'
-                artifactId = 'ColorPicker'
+                artifactId = 'color-picker'
                 version = '1.0.0'
             }
         }
@@ -67,7 +75,12 @@ afterEvaluate {
             maven {
                 name = 'GitHubPackages'
 
-                url = uri("https://github.com/lxlgarnett/color-picker-android")
+                url = uri("https://maven.pkg.github.com/lxlgarnett/color-picker-android")
+
+                credentials {
+                    username = 'lxlgarnett'
+                    password = token
+                }
             }
         }
     }
