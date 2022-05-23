@@ -54,7 +54,7 @@ Properties githubProperties = new Properties()
 if (githubPropertiesFile.canRead()) {
     githubProperties.load(new FileInputStream(githubPropertiesFile))
 }
-def token= githubProperties['TOKEN']
+def token = githubProperties['TOKEN']
 
 afterEvaluate {
     publishing {
